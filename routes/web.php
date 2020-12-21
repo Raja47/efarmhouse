@@ -31,6 +31,10 @@ Route::get('contact', function () {
   return view('contact');
 });
 
+Route::get('farms', function () {
+  return view('farm_detail');
+});
+
 
 Route::get('/','Home@index');
 
