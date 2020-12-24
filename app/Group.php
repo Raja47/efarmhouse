@@ -5,7 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GROUP extends Model
+class Group extends Model
 {
     use SoftDeletes;
+
+    public function farmhouses(){
+    	return $this->hasMany('App\Farmhouse');
+    }
+
 }

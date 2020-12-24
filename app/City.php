@@ -9,4 +9,8 @@ class City extends Model
 {
 	use SoftDeletes;
 	protected $table="cities";
+
+	public function farmhouses(){
+		return $this->hasMany('App\Farmhouse');
+	}
 }

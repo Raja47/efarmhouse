@@ -9,9 +9,21 @@ class Farmhouse extends Model
 {
 
 	use SoftDeletes;
-	
+
+	public function group(){
+		return $this->belongsTo('App\Group');
+	}
+
     public function images(){
     	return $this->morphMany(Image::class, 'imageable');	
     } 
+
+    public function city(){
+    	return $this->hasOne('App\City');
+    }
+
+    public function categories(){
+    	return $this->belongsToMany('App\Category');
+    }
 
 }
