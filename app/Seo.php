@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Image extends Model
+class Seo extends Model
 {
     use SoftDeletes;
+    protected $table = 'seo';
 
-    public function imageable()
-    {
-        return $this->morphTo();
+    public function farmhouse(){
+    	return $this->belongsTo('App\Farmhouse');
     }
 }
