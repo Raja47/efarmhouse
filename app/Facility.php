@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Facility extends Model
 {
+    
     use SoftDeletes;
+
     protected $table="facilities";
 
-  
+  	public function farmhouses(){
+  		return $this->belongsToMany('App\Farmhouse');
+  	}
 
 }

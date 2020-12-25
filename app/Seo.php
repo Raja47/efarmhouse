@@ -9,4 +9,8 @@ class Seo extends Model
 {
     use SoftDeletes;
     protected $table = 'seo';
+
+    public function farmhouse(){
+    	return $this->belongsTo('App\Farmhouse');
+    }
 }

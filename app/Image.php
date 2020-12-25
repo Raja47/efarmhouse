@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Image extends Model
 {
     use SoftDeletes;
+
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }

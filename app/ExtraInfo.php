@@ -9,4 +9,8 @@ class ExtraInfo extends Model
 {
 	use SoftDeletes;
 	protected $table="extra_info";
+
+	public function farmhouse(){
+		return $this->belongsTo('App\Farmhouse');
+	}
 }

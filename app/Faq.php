@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class FAQ extends Model
+class Faq extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes;	
+
+    public function farmhouse(){
+    	return $this->belongsTo('App\Farmhouse');
+    }	
 }
