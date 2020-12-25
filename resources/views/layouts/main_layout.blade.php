@@ -25,6 +25,8 @@
     <link href="css/icofont.min.css" rel="stylesheet">
     <link href="css/contact.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fotorama.css">
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -560,8 +562,10 @@
 <script type="text/javascript" src="js/daterangepicker.min.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/home.js"></script>
-
-
+<script src="js/fotorama.js"></script>
+<script type="text/javascript" src="js/ion.rangeSlider.min.js"></script>
+<script src="js/infobox.js"></script>
+<script src="js/map-engine.js"></script>
 
 
     </div>
