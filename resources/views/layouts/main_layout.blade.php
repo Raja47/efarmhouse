@@ -19,13 +19,15 @@
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="">
     <link rel="canonical" href="http://efarmhouses.pk">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/ionicons.min.css" rel="stylesheet">
-    <link href="css/icofont.min.css" rel="stylesheet">
-    <link href="css/contact.css" rel="stylesheet">
-    <link href="css/app.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+    <link href="{{ asset('css/bootstrap.css') }} " rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/ionicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/icofont.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/ion.rangeSlider.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fotorama.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" id="google-font-css-css" href="https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600" type="text/css" media="all">
@@ -99,9 +101,9 @@
 
     
 </style>
-    <link href="css/owl.carousel.css" rel="stylesheet">
-	<link href="css/space.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css">
+    <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/space.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/ion.rangeSlider.min.css') }}">
     
 </head>
 <body class="" cz-shortcut-listen="true">
@@ -533,11 +535,11 @@
 </script>            </div>
         </div>
     </div>
-</div><link rel="stylesheet" href="css/flag-icon.min.css">
+</div><link rel="stylesheet" href="{{ asset('css/flag-icon.min.css') }}">
 
 
-<script src="js/intersection-observer.js"></script>
-<script async="" src="js/lazyload.min.js"></script>
+<script src="{{ asset('js/intersection-observer.js') }}"></script>
+<script async="" src="{{ asset('js/lazyload.min.js') }}"></script>
 <script>
     // Set the options to make LazyLoad self-initialize
     window.lazyLoadOptions = {
@@ -552,16 +554,18 @@
 
 
 </script>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/vue.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script type="text/javascript" src="js/daterangepicker.min.js"></script>
-<script src="js/functions.js"></script>
-<script src="js/home.js"></script>
-
-
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/vue.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/daterangepicker.min.js') }}"></script>
+<script src="{{ asset('js/functions.js') }}"></script>
+<script src="{{ asset('js/home.js') }}"></script>
+<script src="{{ asset('js/fotorama.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/ion.rangeSlider.min.js') }}"></script>
+<script src="{{ asset('js/infobox.js') }}"></script>
+<script src="{{ asset('js/map-engine.js') }}"></script>
 
 
     </div>

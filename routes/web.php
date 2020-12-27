@@ -19,9 +19,16 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
-Route::get('/', function () {
-  return view('home');
-});
+Route::resource('/','HomeController');
+
+//Route::resource('/{slug}/show','HomeController')->name('*','farmHouse.show');
+
+Route::get('/{slug}/show','HomeController@show')->name('farmHouse.show');
+
+
+// Route::get('/', function () {
+//   return view('home');
+// });
 
 
 Route::get('/home', 'Site\FarmhouseController@index');
@@ -34,7 +41,11 @@ Route::get('contact', function () {
   return view('contact');
 });
 
+Route::get('farms', function () {
+  return view('farm_detail');
+});
 
-Route::get('/','Home@index');
+
+//Route::get('/','Home@index');
 
 

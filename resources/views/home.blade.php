@@ -121,30 +121,33 @@
                     <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1875px;">
 
 
-                    @foreach($datas as $data)
+                    @foreach($featuredFarmHouse as $featuredFarmHouse)
                         
                         <div class="owl-item active" style="width: 360px; margin-right: 15px;">
                         <div class="item-loop ">
                             <div class="thumb-image ">
-                                <a href="http://efarmhouses.pk/en/farmhouse/luxury-studio">
+                                <a href="{{ route('farmHouse.show', ['slug'=>$featuredFarmHouse->slug]) }}">
                                     <img class="img-responsive lazy loaded" data-src="http://efarmhouses.pk/uploads/demo/space/space-1.jpg" alt="LUXURY STUDIO" src="http://efarmhouses.pk/uploads/demo/space/space-1.jpg" data-was-processed="true">
                                 </a>
                                 <div class="price-wrapper">
                                     <div class="price">
-                                        <span class="onsale">Rs300</span>
-                                        <span class="text-price">Rs270<span class="unit">/day</span></span>
+                                        @if($featuredFarmHouse->sale_price)
+                                        <span class="onsale">Rs $featuredFarmHouse->sale_price</span>
+                                        @endif
+
+                                        <span class="text-price">Rs{{$featuredFarmHouse->price}}<span class="unit">/day</span></span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="item-title">
-                                <a href="http://efarmhouses.pk/en/farmhouse/luxury-studio">
-                                    <i class="fa fa-bolt d-none"></i>{{$data->title}}
+                                <a href="{{ route('farmHouse.show', ['slug'=>$featuredFarmHouse->slug]) }}">
+                                    <i class="fa fa-bolt d-none"></i>{{$featuredFarmHouse->title}}
                                 </a>
                                 <div class="sale_info">10%</div>
                             </div>
                             <div class="location">
-                                New York, United States
+                                {{$featuredFarmHouse->location_address}}
                             </div>
         
                             <div class="service-review">
@@ -172,252 +175,8 @@
 
                     @endforeach
 
-                        <div class="owl-item active" style="width: 360px; margin-right: 15px;">
-                        <div class="item-loop ">
-                            <div class="thumb-image ">
-                                <a href="http://efarmhouses.pk/en/farmhouse/luxury-studio">
-                                    <img class="img-responsive lazy loaded" data-src="http://efarmhouses.pk/uploads/demo/space/space-1.jpg" alt="LUXURY STUDIO" src="http://efarmhouses.pk/uploads/demo/space/space-1.jpg" data-was-processed="true">
-                                </a>
-                                <div class="price-wrapper">
-                                    <div class="price">
-                                        <span class="onsale">Rs300</span>
-                                        <span class="text-price">Rs270 <span class="unit">/day</span></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item-title">
-                                <a href="http://efarmhouses.pk/en/farmhouse/luxury-studio">
-                                    <i class="fa fa-bolt d-none"></i>LUXURY STUDIO
-                                </a>
-                                <div class="sale_info">10%</div>
-                            </div>
-                            <div class="location">
-                                New York, United States
-                            </div>
-        
-                            <div class="service-review">
-                                <span class="rate">
-                                     5.0/5  <span class="rate-text">Excellent</span>
-                                </span>
-                                <span class="review">2 Reviews</span>
-                            </div>
-    
-                            <div class="amenities clearfix">
-                                <span class="amenity bed" data-toggle="tooltip" title="" data-original-title="No. Bed">
-                                    <i class="input-icon field-icon icofont-hotel"></i> 6
-                                </span>
-                                <span class="amenity bath" data-toggle="tooltip" title="" data-original-title="No. Bathroom">
-                                    <i class="input-icon field-icon icofont-bathtub"></i> 9
-                                </span>
-                                <span class="amenity size" data-toggle="tooltip" title="" data-original-title="Square">
-                                    <i class="input-icon field-icon icofont-ruler-compass-alt"></i>127m<sup>2</sup>
-                                </span>
-                            </div>
-                        
-                        </div>
-                        </div>
-
-
-<div class="owl-item active" style="width: 360px; margin-right: 15px;"><div class="item-loop ">
-        <div class="thumb-image ">
-        <a href="http://efarmhouses.pk/en/farmhouse/luxury-apartment">
-                                                <img class="img-responsive lazy loaded" data-src="http://efarmhouses.pk/uploads/demo/space/space-2.jpg" alt="LUXURY APARTMENT" src="http://efarmhouses.pk/uploads/demo/space/space-2.jpg" data-was-processed="true">
-                                    </a>
-            <div class="price-wrapper">
-                <div class="price">
-                    <span class="onsale"></span>
-                    <span class="text-price">Rs900 <span class="unit">/day</span></span>
-                </div>
-            </div>
-    </div>
-    <div class="item-title">
-        <a href="http://efarmhouses.pk/en/farmhouse/luxury-apartment">
-                            <i class="fa fa-bolt d-none"></i>
-                        LUXURY APARTMENT
-        </a>
-            </div>
-    <div class="location">
-                                California
-            </div>
-        <div class="service-review">
-        <span class="rate">
-             4.3/5  <span class="rate-text">Very Good</span>
-        </span>
-        <span class="review">
-                             4 Reviews
-                    </span>
-    </div>
-    <div class="amenities clearfix">
-
-
-
-        
-            
-                
-            
-        
-
-
-                <span class="amenity bed" data-toggle="tooltip" title="" data-original-title="No. Bed">
-                <i class="input-icon field-icon icofont-hotel"></i> 4
-            </span>
-                            <span class="amenity bath" data-toggle="tooltip" title="" data-original-title="No. Bathroom">
-                <i class="input-icon field-icon icofont-bathtub"></i> 3
-            </span>
-                            <span class="amenity size" data-toggle="tooltip" title="" data-original-title="Square">
-                <i class="input-icon field-icon icofont-ruler-compass-alt"></i>127m<sup>2</sup>
-            </span>
-            </div>
-</div></div><div class="owl-item active" style="width: 360px; margin-right: 15px;"><div class="item-loop ">
-        <div class="thumb-image ">
-        <a href="http://efarmhouses.pk/en/farmhouse/beautiful-loft">
-                                                <img class="img-responsive lazy loaded" data-src="http://efarmhouses.pk/uploads/demo/space/space-3.jpg" alt="BEAUTIFUL LOFT" src="http://efarmhouses.pk/uploads/demo/space/space-3.jpg" data-was-processed="true">
-                                    </a>
-            <div class="price-wrapper">
-                <div class="price">
-                    <span class="onsale"></span>
-                    <span class="text-price">Rs650 <span class="unit">/day</span></span>
-                </div>
-            </div>
-    </div>
-    <div class="item-title">
-        <a href="http://efarmhouses.pk/en/farmhouse/beautiful-loft">
-                        BEAUTIFUL LOFT
-        </a>
-            </div>
-    <div class="location">
-                                California
-            </div>
-        <div class="service-review">
-        <span class="rate">
-             4.7/5  <span class="rate-text">Excellent</span>
-        </span>
-        <span class="review">
-                             3 Reviews
-                    </span>
-    </div>
-    <div class="amenities clearfix">
-
-
-
-        
-            
-                
-            
-        
-
-
-                <span class="amenity bed" data-toggle="tooltip" title="" data-original-title="No. Bed">
-                <i class="input-icon field-icon icofont-hotel"></i> 8
-            </span>
-                            <span class="amenity bath" data-toggle="tooltip" title="" data-original-title="No. Bathroom">
-                <i class="input-icon field-icon icofont-bathtub"></i> 4
-            </span>
-                            <span class="amenity size" data-toggle="tooltip" title="" data-original-title="Square">
-                <i class="input-icon field-icon icofont-ruler-compass-alt"></i>127m<sup>2</sup>
-            </span>
-            </div>
-</div></div><div class="owl-item" style="width: 360px; margin-right: 15px;"><div class="item-loop ">
-        <div class="thumb-image ">
-        <a href="http://efarmhouses.pk/en/farmhouse/best-of-west-village">
-                                                <img class="img-responsive lazy" data-src="http://efarmhouses.pk/uploads/demo/space/space-4.jpg" alt="BEST OF WEST VILLAGE">
-                                    </a>
-            <div class="price-wrapper">
-                <div class="price">
-                    <span class="onsale"></span>
-                    <span class="text-price">Rs800 <span class="unit">/day</span></span>
-                </div>
-            </div>
-    </div>
-    <div class="item-title">
-        <a href="http://efarmhouses.pk/en/farmhouse/best-of-west-village">
-                            <i class="fa fa-bolt d-none"></i>
-                        BEST OF WEST VILLAGE
-        </a>
-            </div>
-    <div class="location">
-                                United States
-            </div>
-        <div class="service-review">
-        <span class="rate">
-             4.5/5  <span class="rate-text">Excellent</span>
-        </span>
-        <span class="review">
-                             4 Reviews
-                    </span>
-    </div>
-    <div class="amenities clearfix">
-
-
-
-        
-            
-                
-            
-        
-
-
-                <span class="amenity bed" data-toggle="tooltip" title="" data-original-title="No. Bed">
-                <i class="input-icon field-icon icofont-hotel"></i> 10
-            </span>
-                            <span class="amenity bath" data-toggle="tooltip" title="" data-original-title="No. Bathroom">
-                <i class="input-icon field-icon icofont-bathtub"></i> 3
-            </span>
-                            <span class="amenity size" data-toggle="tooltip" title="" data-original-title="Square">
-                <i class="input-icon field-icon icofont-ruler-compass-alt"></i>127m<sup>2</sup>
-            </span>
-            </div>
-</div></div><div class="owl-item" style="width: 360px; margin-right: 15px;"><div class="item-loop ">
-        <div class="thumb-image ">
-        <a href="http://efarmhouses.pk/en/farmhouse/duplex-greenwich">
-                                                <img class="img-responsive lazy" data-src="http://efarmhouses.pk/uploads/demo/space/space-5.jpg" alt="DUPLEX GREENWICH">
-                                    </a>
-            <div class="price-wrapper">
-                <div class="price">
-                    <span class="onsale"></span>
-                    <span class="text-price">Rs220 <span class="unit">/day</span></span>
-                </div>
-            </div>
-    </div>
-    <div class="item-title">
-        <a href="http://efarmhouses.pk/en/farmhouse/duplex-greenwich">
-                        DUPLEX GREENWICH
-        </a>
-            </div>
-    <div class="location">
-                                Los Angeles
-            </div>
-        <div class="service-review">
-        <span class="rate">
-             4.8/5  <span class="rate-text">Excellent</span>
-        </span>
-        <span class="review">
-                             4 Reviews
-                    </span>
-    </div>
-    <div class="amenities clearfix">
-
-
-
-        
-            
-                
-            
-        
-
-
-                <span class="amenity bed" data-toggle="tooltip" title="" data-original-title="No. Bed">
-                <i class="input-icon field-icon icofont-hotel"></i> 8
-            </span>
-                            <span class="amenity bath" data-toggle="tooltip" title="" data-original-title="No. Bathroom">
-                <i class="input-icon field-icon icofont-bathtub"></i> 4
-            </span>
-                            <span class="amenity size" data-toggle="tooltip" title="" data-original-title="Square">
-                <i class="input-icon field-icon icofont-ruler-compass-alt"></i>127m<sup>2</sup>
-            </span>
-            </div>
-</div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous"></span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next"></span></button></div><div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div></div>
+      
+</div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous"></span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next"></span></button></div><div class="owl-dots"><button role="button" class="owl-dot active"><span></span></button><button role="button" class="owl-dot"><span></span></button></div></div>
                     </div>
     </div>
 </div><div class="bravo-featured-box">
@@ -432,6 +191,9 @@
                             </div>
         </div>
     </div>
+
+
+    
 <div class="container">
     <div class="bravo-list-locations  style_2 ">
         <div class="title">
