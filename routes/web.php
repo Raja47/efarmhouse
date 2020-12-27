@@ -30,6 +30,9 @@ Route::get('/{slug}/show','HomeController@show')->name('farmHouse.show');
 //   return view('home');
 // });
 
+
+Route::get('/home', 'Site\FarmhouseController@index');
+
 Route::get('all', function () {
   return view('all_farm_houses');
 });
