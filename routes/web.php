@@ -45,7 +45,8 @@ Route::get('farms', function () {
   return view('farm_detail');
 });
 
+Auth::routes(['verify' => true]);
 
-//Route::get('/','Home@index');
+require 'admin.php';
 
 
