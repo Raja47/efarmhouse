@@ -16,9 +16,9 @@
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Name </th>
-                                <th> Slug </th>
+                                <th class="text-center"> # </th>
+                                <th class="text-center"> Name </th>
+                                <th class="text-center"> Slug </th>
                                 <th class="text-center"> Parent </th>
                                 <th class="text-center"> Featured </th>
                                 <th class="text-center"> Menu </th>
@@ -31,10 +31,10 @@
                             @foreach($categories as $category)
                                 @if ($category->id != 1)
                                     <tr>
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->parent->name }}</td>
+                                        <td class="text-center">{{ $category->id }}</td>
+                                        <td class="text-center">{{ $category->title }}</td>
+                                        <td class="text-center">{{ $category->slug }}</td>
+                                        <td class="text-center">{{ optional($category->parent)->title ?? 'none' }}</td>
                                         <td class="text-center">
                                             @if ($category->featured == 1)
                                                 <span class="badge badge-success">Yes</span>
