@@ -4,15 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use TypiCMS\NestableTrait;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Category extends Model
+class Category extends Model implements HasMedia
 {
-    use SoftDeletes,NestableTrait;
-    
+    use SoftDeletes  , InteractsWithMedia;
+
     protected $table="categories";
 
+    protected $fillable = [ 'title' , 'slug' ,'description' , 'featured' , 'status' ,'orders'  ];
+
+    protected $casts = [
+        'featured' => 'boolean',
+        'status'   => 'boolean'
+    ];
+    
     public function farmhouses(){
     	return $this->belongsToMany('App\Farmhouse');
     }
@@ -26,20 +34,6 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function children()
-    {
-        return $this->hasMany(Category::class, 'parent_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
+    
 
 }

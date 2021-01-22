@@ -6,7 +6,7 @@
             <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
             <p>{{ $subTitle }}</p>
         </div>
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary pull-right">Add Category</a>
+        <a href="{{ route('admin.cities.create') }}" class="btn btn-primary pull-right">Add City</a>
     </div>
    @include('admin.partials.flash')
     <div class="row">
@@ -26,27 +26,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $category)
-                                @if ($category->id != 1)
+                            @foreach($cities as $city)
+                                @if ($city->id != 1)
                                     <tr>
-                                        <td class="text-center">{{ $category->id }}</td>
-                                        <td class="text-center">{{ $category->title }}</td>
-                                        <td class="text-center">{{ $category->slug }}</td>
-                                        <td class="text-center">{{ optional($category->parent)->title ?? 'none' }}</td>
+                                        <td class="text-center">{{ $city->id }}</td>
+                                        <td class="text-center">{{ $city->title }}</td>
+                                        <td class="text-center">{{ $city->slug }}</td>
+                                        <td class="text-center">{{ optional($city->parent)->title ?? 'none' }}</td>
                                         <td class="text-center">
-                                            @if ($category->featured == 1)
+                                            @if ($city->featured == 1)
                                                 <span class="badge badge-success">Yes</span>
                                             @else
                                                 <span class="badge badge-danger">No</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            {{ $category->orders }}
+                                            {{ $city->orders }}
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="Second group">
-                                                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('admin.categories.delete', $category->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('admin.cities.edit', $city->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('admin.cities.delete', $city->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

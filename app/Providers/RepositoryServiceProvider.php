@@ -2,15 +2,23 @@
 
 namespace App\Providers;
 
-use App\Contracts\CategoryContract;
 use Illuminate\Support\ServiceProvider;
+
+use App\Contracts\CategoryContract;
 use App\Repositories\CategoryRepository;
+use App\Contracts\CityContract;
+use App\Repositories\CityRepository;
+use App\Contracts\GroupContract;
+use App\Repositories\GroupRepository;
+use App\Contracts\FacilityContract;
+use App\Repositories\FacilityRepository;
+use App\Contracts\FarmhouseContract;
+use App\Repositories\FarmhouseRepository;
+
 //use App\Contracts\AttributeContract;
 // use App\Repositories\AttributeRepository;
 // use App\Contracts\BrandContract;
 // use App\Repositories\BrandRepository;
-// use App\Contracts\ProductContract;
-// use App\Repositories\ProductRepository;
 // use App\Contracts\OrderContract;
 // use App\Repositories\OrderRepository;
 // use App\Contracts\BannerContract;
@@ -26,11 +34,11 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
         CategoryContract::class         =>          CategoryRepository::class,
-        //AttributeContract::class        =>          AttributeRepository::class,
-        //BrandContract::class            =>          BrandRepository::class,
-        //ProductContract::class          =>          ProductRepository::class,
-        //OrderContract::class            =>          OrderRepository::class,
-        //BannerContract::class           =>          BannerRepository::class,
+        CityContract::class             =>          CityRepository::class,
+        GroupContract::class            =>          GroupRepository::class,
+        FacilityContract::class         =>          FacilityRepository::class,
+        FarmhouseContract::class        =>          FarmhouseRepository::class,
+       
         //CategoryBannerContract::class   =>          CategoryBannerRepository::class,
         //UserContract::class             =>          UserRepository::class,
         //CouponAndDealContract::class    =>          CouponAndDealRepository::class,

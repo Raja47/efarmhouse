@@ -23,28 +23,41 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="general">
                     <div class="tile">
-                    <form action="{{ route('admin.categories.update') }}" method="POST" role="form" enctype="multipart/form-data">
+                    <form action="{{ route('admin.cities.update') }}" method="POST" role="form" enctype="multipart/form-data">
                         @csrf
-                     <h3 class="tile-title">Category Information</h3>
+                     <h3 class="tile-title">City Information</h3>
                     <hr>
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="title">Title <span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title', $targetCategory->title) }}"/>
-                            <input type="hidden" name="id" value="{{ $targetCategory->id }}">
+                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title', $targetCity->title) }}"/>
+                            <input type="hidden" name="id" value="{{ $targetCity->id }}">
                             @error('name') {{ $message }} @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="description">Description</label>
-                            <textarea class="form-control" rows="4" name="description" id="description">{{ old('description', $targetCategory->description) }}</textarea>
+                            <textarea class="form-control" rows="4" name="description" id="description">{{ old('description', $targetCity->description) }}</textarea>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="parent">Parent City <span class="m-l-5 text-danger"> *</span></label>
+                            <select id=parent class="form-control custom-select mt-15 @error('parent_id') is-invalid @enderror" name="parent_id">
+                                <option value="0">Select a parent city</option>
+                                @foreach($cities as $key => $city)
+                                    @if ($targetCity->parent_id == $key)
+                                        <option value="{{ $key }}" selected> {{ $city }} </option>
+                                    @else
+                                        <option value="{{ $key }}"> {{ $city }} </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('parent_id') {{ $message }} @enderror
+                        </div>
                         <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" id="featured" name="featured"
-                                    {{ $targetCategory->featured == 1 ? 'checked' : '' }}
-                                    />Featured Category
+                                    {{ $targetCity->featured == 1 ? 'checked' : '' }}
+                                    />Featured City
                                 </label>
                             </div>
                         </div>
@@ -52,14 +65,14 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ( $targetCategory->getFirstMediaUrl('image') != null)
+                                    @if ( $targetCity->getFirstMediaUrl('image') != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ $targetCategory->getFirstMediaUrl('image') }}" id="categoryImage" class="img-fluid" alt="img">
+                                            <img src="{{ $targetCity->getFirstMediaUrl('image') }}" id="cityImage" class="img-fluid" alt="img">
                                         </figure>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label class="control-label">Category Image</label>
+                                    <label class="control-label">City Image</label>
                                     <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                     @error('image') {{ $message }} @enderror
                                 </div>
@@ -69,14 +82,14 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ( $targetCategory->getFirstMediaUrl('bgImage') != null)
+                                    @if ( $targetCity->getFirstMediaUrl('bgImage') != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ $targetCategory->getFirstMediaUrl('bgImage') }}" id="categoryImage" class="img-fluid" alt="img">
+                                            <img src="{{ $targetCity->getFirstMediaUrl('bgImage') }}" id="cityImage" class="img-fluid" alt="img">
                                         </figure>
                                    @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label class="control-label">Category Background</label>
+                                    <label class="control-label">City Background</label>
                                     <input class="form-control @error('background') is-invalid @enderror" type="file" id="image" name="background"/>
                                     @error('background') {{ $message }} @enderror
                                 </div>
@@ -84,9 +97,9 @@
                         </div>
                     </div>
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Category</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update City</button>
                         &nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary" href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.cities.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                     </div>
                 </form>
              </div>
@@ -103,7 +116,7 @@
             <!--                <div class="row">-->
             <!--                    <div class="col-md-12">-->
             <!--                        <form action="" class="dropzone" id="dropzone" style="border: 2px dashed rgba(0,0,0,0.3)">-->
-            <!--                            <input type="hidden" name="category_id" value="{{ $targetCategory->id }}">-->
+            <!--                            <input type="hidden" name="city_id" value="{{ $targetCity->id }}">-->
             <!--                            {{ csrf_field() }}-->
             <!--                        </form>-->
             <!--                    </div-->
@@ -115,15 +128,15 @@
             <!--                        </button>-->
             <!--                    </div>-->
             <!--                </div>-->
-            <!--                @if ($targetCategory->banners)-->
+            <!--                @if ($targetCity->banners)-->
             <!--                    <hr>-->
             <!--                    <div class="row">-->
-            <!--                        @foreach($targetCategory->banners as $banner)-->
+            <!--                        @foreach($targetCity->banners as $banner)-->
             <!--                            <div class="col-md-3">-->
             <!--                                <div class="card">-->
             <!--                                    <div class="card-body">-->
             <!--                                        <img src="{{ asset('storage/'.$banner->banner) }}" id="brandLogo" class="img-fluid" alt="img">-->
-            <!--                                        <a class="card-link float-right text-danger" href="{{ route('admin.categories.banners.delete', $banner->id) }}">-->
+            <!--                                        <a class="card-link float-right text-danger" href="{{ route('admin.cities.banners.delete', $banner->id) }}">-->
             <!--                                            <i class="fa fa-fw fa-lg fa-trash"></i>-->
             <!--                                        </a>-->
             <!--                                    </div>-->
@@ -149,7 +162,7 @@
         Dropzone.autoDiscover = false;
 
         $( document ).ready(function() {
-            $('#categories').select2();
+            $('#cities').select2();
 
             let myDropzone = new Dropzone("#dropzone", {
                 paramName: "banner",
@@ -162,7 +175,7 @@
             });
             myDropzone.on("queuecomplete", function (file) {
                 //window.location.reload();
-                showNotification('Completed', 'All Category uploaded', 'success', 'fa-check');
+                showNotification('Completed', 'All City uploaded', 'success', 'fa-check');
             });
             $('#uploadButton').click(function(){
                 if (myDropzone.files.length === 0) {

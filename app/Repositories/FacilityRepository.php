@@ -2,28 +2,28 @@
 
 namespace App\Repositories;
 
-use App\Category;
+use App\Facility;
 use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
-use App\Contracts\CategoryContract;
+use App\Contracts\FacilityContract;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
 /**
- * Class CategoryRepository
+ * Class FacilityRepository
  *
  * @package \App\Repositories
  */
-class CategoryRepository extends BaseRepository implements CategoryContract
+class FacilityRepository extends BaseRepository implements FacilityContract
 {
     use UploadAble;
 
     /**
-     * CategoryRepository constructor.
-     * @param Category $model
+     * FacilityRepository constructor.
+     * @param Facility $model
      */
-    public function __construct(Category $model)
+    public function __construct(Facility $model)
     {
         parent::__construct($model);
         $this->model = $model;
@@ -35,7 +35,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @param array $columns
      * @return mixed
      */
-    public function listCategories(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
+    public function listFacilities(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
     {
         return $this->all($columns, $order, $sort);
     }
@@ -45,7 +45,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @return mixed
      * @throws ModelNotFoundException
      */
-    public function findCategoryById(int $id)
+    public function findFacilityById(int $id)
     {
         try {
             return $this->findOneOrFail($id);
@@ -59,9 +59,9 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
     /**
      * @param array $params
-     * @return Category|mixed
+     * @return Facility|mixed
      */
-    public function createCategory(array $params)
+    public function createFacility(array $params)
     {
         try {
             $collection = collect($params);
@@ -72,28 +72,23 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
             $merge = $collection->merge(compact('featured'));
 
-            $category = new Category($merge->all());
+            $facility = new Facility($merge->all());
 
-            $category->save();
+            $facility->save();
 
 
             $image = null;
            
-           if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
-                 $category->addMedia($params['background'])
-                   ->withResponsiveImages()
-                   ->toMediaCollection('bgImage');
-           }     
                
 
             if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
-                $category->addMedia($params['image'])
+                $facility->addMedia($params['image'])
                 ->withResponsiveImages()
                 ->toMediaCollection('image');
             }
           
 
-            return $category;
+            return $facility;
 
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
@@ -104,72 +99,53 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @param array $params
      * @return mixed
      */
-    public function updateCategory(array $params)
+    public function updateFacility(array $params)
     {
-        $category = $this->findCategoryById($params['id']);
+        $facility = $this->findFacilityById($params['id']);
 
         $collection = collect($params)->except('_token');
 
         if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
 
-            $category->clearMediaCollection('image');
-            $category->addMedia($params['image'])
+            $facility->clearMediaCollection('image');
+            $facility->addMedia($params['image'])
                 ->withResponsiveImages()
                 ->toMediaCollection('image');
             
         }
 
-         if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
-            
-            $category->clearMediaCollection('bgImage');
-        
-            $category->addMedia($params['background'])
-                ->withResponsiveImages()
-                ->toMediaCollection('bgImage');
-            
-        }
 
         $featured = $collection->has('featured') ? 1 : 0;
 
         $merge = $collection->merge(compact('featured'));
 
-        $category->update($merge->all());
+        $facility->update($merge->all());
 
-        return $category;
+        return $facility;
     }
 
     /**
      * @param $id
      * @return bool|mixed
      */
-    public function deleteCategory($id)
+    public function deleteFacility($id)
     {
-        $category = $this->findCategoryById($id);
+        $facility = $this->findFacilityById($id);
 
-        if ($category->image != null) {
-            $this->deleteOne($category->image);
+        if ($facility->image != null) {
+            $this->deleteOne($facility->image);
         }
 
-        $category->delete();
+        $facility->delete();
 
-        return $category;
+        return $facility;
     }
 
-    /**
-     * @return mixed
-     */
-    public function treeList()
-    {
-        return Category::orderByRaw('-title ASC')
-            ->get()
-            ->nest()
-            ->setIndent('|–– ')
-            ->listsFlattened('title');
-    }
+   
 
     public function findBySlug($slug)
     {
-        return Category::with('children')
+        return Facility::with('children')
             ->with('banners')
             ->where('slug', $slug)
             ->first();

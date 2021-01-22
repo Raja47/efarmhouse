@@ -56,10 +56,9 @@ class CategoryController extends BaseController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'      =>  'required|max:191',
-            'parent_id' =>  'required|not_in:0',
-            'image'     =>  'mimes:jpg,jpeg,png|max:1000',
-            'background' => 'mimes:jpg,jpeg,png|max:3000',
+            'title'      =>  'required|max:191',
+            'image'     =>  'mimes:jpg,jpeg,png|max:10000',
+            'background' => 'mimes:jpg,jpeg,png|max:30000',
         ]);
 
         $params = $request->except('_token');
@@ -93,10 +92,9 @@ class CategoryController extends BaseController
     public function update(Request $request)
     {
         $this->validate($request, [
-            'name'      =>  'required|max:191',
-            'parent_id' =>  'required|not_in:0',
-            'image'     =>  'mimes:jpg,jpeg,png|max:1000',
-            'background'     =>  'mimes:jpg,jpeg,png|max:1000'
+            'title'      =>  'required|max:191',
+            'image'     =>  'mimes:jpg,jpeg,png|max:10000',
+            'background'     =>  'mimes:jpg,jpeg,png|max:10000'
         ]);
 
         $params = $request->except('_token');

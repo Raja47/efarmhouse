@@ -28,6 +28,46 @@ Route::group(['prefix'  =>  'admin'], function (){
             Route::get('banners/{id}/delete', 'Admin\CategoryBannerController@delete')->name('admin.categories.banners.delete');
         });
 
+        Route::group(['prefix'  =>   'groups'], function() {
+
+            Route::get('/', 'Admin\GroupController@index')->name('admin.groups.index');
+            Route::get('/create', 'Admin\GroupController@create')->name('admin.groups.create');
+            Route::post('/store', 'Admin\GroupController@store')->name('admin.groups.store');
+            Route::get('/{id}/edit', 'Admin\GroupController@edit')->name('admin.groups.edit');
+            Route::post('/update', 'Admin\GroupController@update')->name('admin.groups.update');
+            Route::get('/{id}/delete', 'Admin\GroupController@delete')->name('admin.groups.delete');
+
+            Route::post('banners/upload', 'Admin\CategoryBannerController@upload')->name('admin.groups.banners.upload');
+            Route::get('banners/{id}/delete', 'Admin\CategoryBannerController@delete')->name('admin.groups.banners.delete');
+        });
+
+
+        Route::group(['prefix'  =>   'cities'], function() {
+
+            Route::get('/', 'Admin\CityController@index')->name('admin.cities.index');
+            Route::get('/create', 'Admin\CityController@create')->name('admin.cities.create');
+            Route::post('/store', 'Admin\CityController@store')->name('admin.cities.store');
+            Route::get('/{id}/edit', 'Admin\CityController@edit')->name('admin.cities.edit');
+            Route::post('/update', 'Admin\CityController@update')->name('admin.cities.update');
+            Route::get('/{id}/delete', 'Admin\CityController@delete')->name('admin.cities.delete');
+
+            // Route::post('banners/upload', 'Admin\CategoryBannerController@upload')->name('admin.categories.banners.upload');
+            // Route::get('banners/{id}/delete', 'Admin\CategoryBannerController@delete')->name('admin.categories.banners.delete');
+        
+        });
+
+        Route::group(['prefix'  =>   'facilities'], function() {
+
+            Route::get('/', 'Admin\FacilityController@index')->name('admin.facilities.index');
+            Route::get('/create', 'Admin\FacilityController@create')->name('admin.facilities.create');
+            Route::post('/store', 'Admin\FacilityController@store')->name('admin.facilities.store');
+            Route::get('/{id}/edit', 'Admin\FacilityController@edit')->name('admin.facilities.edit');
+            Route::post('/update', 'Admin\FacilityController@update')->name('admin.facilities.update');
+            Route::get('/{id}/delete', 'Admin\FacilityController@delete')->name('admin.facilities.delete');
+
+        });
+
+
         Route::group(['prefix'  =>   'attributes'], function() {
 
             Route::get('/', 'Admin\AttributeController@index')->name('admin.attributes.index');
@@ -77,24 +117,24 @@ Route::group(['prefix'  =>  'admin'], function (){
 
         });
 
-        Route::group(['prefix' => 'products'], function () {
+        Route::group(['prefix' => 'farmhouses'], function () {
 
-           Route::get('/', 'Admin\ProductController@index')->name('admin.products.index');
-           Route::get('/create', 'Admin\ProductController@create')->name('admin.products.create');
-           Route::post('/store', 'Admin\ProductController@store')->name('admin.products.store');
-           Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('admin.products.edit');
-           Route::get('/{id}/delete', 'Admin\ProductController@delete')->name('admin.products.delete');
-           Route::post('/update', 'Admin\ProductController@update')->name('admin.products.update');
+           Route::get('/', 'Admin\FarmhouseController@index')->name('admin.farmhouses.index');
+           Route::get('/create', 'Admin\FarmhouseController@create')->name('admin.farmhouses.create');
+           Route::post('/store', 'Admin\FarmhouseController@store')->name('admin.farmhouses.store');
+           Route::get('/edit/{id}', 'Admin\FarmhouseController@edit')->name('admin.farmhouses.edit');
+           Route::get('/{id}/delete', 'Admin\FarmhouseController@delete')->name('admin.farmhouses.delete');
+           Route::post('/update', 'Admin\FarmhouseController@update')->name('admin.farmhouses.update');
 
-           Route::post('images/upload', 'Admin\ProductImageController@upload')->name('admin.products.images.upload');
-           Route::get('images/{id}/delete', 'Admin\ProductImageController@delete')->name('admin.products.images.delete');
-           Route::get('images/show', 'Admin\ProductImageController@show')->name('admin.products.images.show');
+           Route::post('images/upload', 'Admin\ProductImageController@upload')->name('admin.farmhouses.images.upload');
+           Route::get('images/{id}/delete', 'Admin\ProductImageController@delete')->name('admin.farmhouses.images.delete');
+           Route::get('images/show', 'Admin\ProductImageController@show')->name('admin.farmhouses.images.show');
 
-           Route::get('attributes/load', 'Admin\ProductAttributeController@loadAttributes');
-           Route::post('attributes', 'Admin\ProductAttributeController@productAttributes');
-           Route::post('attributes/values', 'Admin\ProductAttributeController@loadValues');
-           Route::post('attributes/add', 'Admin\ProductAttributeController@addAttribute');
-           Route::post('attributes/delete', 'Admin\ProductAttributeController@deleteAttribute');
+           // Route::get('attributes/load', 'Admin\ProductAttributeController@loadAttributes');
+           // Route::post('attributes', 'Admin\ProductAttributeController@productAttributes');
+           // Route::post('attributes/values', 'Admin\ProductAttributeController@loadValues');
+           // Route::post('attributes/add', 'Admin\ProductAttributeController@addAttribute');
+           // Route::post('attributes/delete', 'Admin\ProductAttributeController@deleteAttribute');
 
         });
 

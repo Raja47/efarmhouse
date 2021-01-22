@@ -2,28 +2,28 @@
 
 namespace App\Repositories;
 
-use App\Category;
+use App\City;
 use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
-use App\Contracts\CategoryContract;
+use App\Contracts\CityContract;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 
 /**
- * Class CategoryRepository
+ * Class CityRepository
  *
  * @package \App\Repositories
  */
-class CategoryRepository extends BaseRepository implements CategoryContract
+class CityRepository extends BaseRepository implements CityContract
 {
     use UploadAble;
 
     /**
-     * CategoryRepository constructor.
-     * @param Category $model
+     * CityRepository constructor.
+     * @param City $model
      */
-    public function __construct(Category $model)
+    public function __construct(City $model)
     {
         parent::__construct($model);
         $this->model = $model;
@@ -35,7 +35,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @param array $columns
      * @return mixed
      */
-    public function listCategories(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
+    public function listCities(string $order = 'id', string $sort = 'desc', array $columns = ['*'])
     {
         return $this->all($columns, $order, $sort);
     }
@@ -45,7 +45,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @return mixed
      * @throws ModelNotFoundException
      */
-    public function findCategoryById(int $id)
+    public function findCityById(int $id)
     {
         try {
             return $this->findOneOrFail($id);
@@ -59,9 +59,9 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
     /**
      * @param array $params
-     * @return Category|mixed
+     * @return City|mixed
      */
-    public function createCategory(array $params)
+    public function createCity(array $params)
     {
         try {
             $collection = collect($params);
@@ -72,28 +72,28 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
             $merge = $collection->merge(compact('featured'));
 
-            $category = new Category($merge->all());
+            $city = new City($merge->all());
 
-            $category->save();
+            $city->save();
 
 
             $image = null;
            
            if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
-                 $category->addMedia($params['background'])
+                 $city->addMedia($params['background'])
                    ->withResponsiveImages()
                    ->toMediaCollection('bgImage');
            }     
                
 
             if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
-                $category->addMedia($params['image'])
+                $city->addMedia($params['image'])
                 ->withResponsiveImages()
                 ->toMediaCollection('image');
             }
           
 
-            return $category;
+            return $city;
 
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
@@ -104,16 +104,16 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      * @param array $params
      * @return mixed
      */
-    public function updateCategory(array $params)
+    public function updateCity(array $params)
     {
-        $category = $this->findCategoryById($params['id']);
+        $city = $this->findCityById($params['id']);
 
         $collection = collect($params)->except('_token');
 
         if ($collection->has('image') && ($params['image'] instanceof  UploadedFile)) {
 
-            $category->clearMediaCollection('image');
-            $category->addMedia($params['image'])
+            $city->clearMediaCollection('image');
+            $city->addMedia($params['image'])
                 ->withResponsiveImages()
                 ->toMediaCollection('image');
             
@@ -121,9 +121,9 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
          if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
             
-            $category->clearMediaCollection('bgImage');
+            $city->clearMediaCollection('bgImage');
         
-            $category->addMedia($params['background'])
+            $city->addMedia($params['background'])
                 ->withResponsiveImages()
                 ->toMediaCollection('bgImage');
             
@@ -133,26 +133,26 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
         $merge = $collection->merge(compact('featured'));
 
-        $category->update($merge->all());
+        $city->update($merge->all());
 
-        return $category;
+        return $city;
     }
 
     /**
      * @param $id
      * @return bool|mixed
      */
-    public function deleteCategory($id)
+    public function deleteCity($id)
     {
-        $category = $this->findCategoryById($id);
+        $city = $this->findCityById($id);
 
-        if ($category->image != null) {
-            $this->deleteOne($category->image);
+        if ($city->image != null) {
+            $this->deleteOne($city->image);
         }
 
-        $category->delete();
+        $city->delete();
 
-        return $category;
+        return $city;
     }
 
     /**
@@ -160,7 +160,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
      */
     public function treeList()
     {
-        return Category::orderByRaw('-title ASC')
+        return City::orderByRaw('-title ASC')
             ->get()
             ->nest()
             ->setIndent('|–– ')
@@ -169,7 +169,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
     public function findBySlug($slug)
     {
-        return Category::with('children')
+        return City::with('children')
             ->with('banners')
             ->where('slug', $slug)
             ->first();

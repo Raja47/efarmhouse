@@ -34,10 +34,10 @@
           <span>Orders</span></a>
       </li>
 
-      <li class="nav-item {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}" >
-        <a class="nav-link" href="{{ route('admin.products.index') }}" >
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.farmhouses.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.farmhouses.index') }}" >
           <i class="fas fa-shopping-bag"></i>
-          <span>Products</span></a>
+          <span>Farmhouses</span></a>
       </li>
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.brands.index' ? 'active' : '' }}" >
@@ -52,11 +52,29 @@
           <span>Attributes</span></a>
       </li>
 
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.groups.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.groups.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Groups</span></a>
+      </li>
+
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.cities.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.cities.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Cities</span></a>
+      </li>
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
           <i class="fas fa-tags"></i>
           <span>Categories</span></a>
+      </li>
+
+
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.facilities.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.facilities.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Facilities</span></a>
       </li>
       
       <li class="nav-item {{ Route::currentRouteName() == 'admin.banners.index' ? 'active' : '' }}" >

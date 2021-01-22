@@ -19,23 +19,23 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="general">
                     <div class="tile">
-                        <form action="{{ route('admin.products.store') }}" method="POST" role="form">
+                        <form action="{{ route('admin.farmhouses.store') }}" method="POST" role="form">
                             @csrf
-                            <h3 class="tile-title">Product Information</h3>
+                            <h3 class="tile-title">Farmhouse Information</h3>
                             <hr>
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="name">Name</label>
+                                    <label class="control-label" for="title">Name</label>
                                     <input
-                                        class="form-control @error('name') is-invalid @enderror"
+                                        class="form-control @error('title') is-invalid @enderror"
                                         type="text"
-                                        placeholder="Enter Product name"
-                                        id="name"
-                                        name="name"
-                                        value="{{ old('name') }}"
+                                        placeholder="Enter Farmhouse name"
+                                        id="title"
+                                        name="title"
+                                        value="{{ old('title') }}"
                                     />
                                     <div class="invalid-feedback active">
-                                        <i class="fa fa-exclamation-circle fa-fw"></i> @error('name') <span>{{ $message }}</span> @enderror
+                                        <i class="fa fa-exclamation-circle fa-fw"></i> @error('title') <span>{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="row">
@@ -45,7 +45,7 @@
                                             <input
                                                 class="form-control @error('sku') is-invalid @enderror"
                                                 type="text"
-                                                placeholder="Enter product sku"
+                                                placeholder="Enter farmhouse sku"
                                                 id="sku"
                                                 name="sku"
                                                 value="{{ old('sku') }}"
@@ -57,15 +57,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="brand_id">Brand</label>
-                                            <select name="brand_id" required id="brand_id" class="form-control @error('brand_id') is-invalid @enderror">
-                                                <option value="0">Select a brand</option>
-                                                @foreach($brands as $brand)
-                                                    <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }} >{{ $brand->name }}</option>
+                                            <label class="control-label" for="city_id">City</label>
+                                            <select name="city_id" required id="city_id" class="form-control @error('city_id') is-invalid @enderror">
+                                                <option value="0">Select a city</option>
+                                                @foreach($cities as $city)
+                                                    <option value="{{ $city->id }}" {{ old('city_id') == $city->id ? 'selected' : '' }} >{{ $city->title }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="invalid-feedback active">
-                                                <i class="fa fa-exclamation-circle fa-fw"></i> @error('brand_id') <span>{{ $message }}</span> @enderror
+                                                <i class="fa fa-exclamation-circle fa-fw"></i> @error('city_id') <span>{{ $message }}</span> @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@
                                             <label class="control-label" for="categories">Categories</label>
                                             <select name="categories[]" id="categories" class="form-control" multiple>
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -89,7 +89,7 @@
                                             <input
                                                 class="form-control @error('price') is-invalid @enderror"
                                                 type="text"
-                                                placeholder="Enter product price"
+                                                placeholder="Enter farmhouse price"
                                                 id="price"
                                                 name="price"
                                                 value="{{ old('price') }}"
@@ -105,7 +105,7 @@
                                             <input
                                                 class="form-control  @error('sale_price') is-invalid @enderror"
                                                 type="text"
-                                                placeholder="Enter product special price"
+                                                placeholder="Enter farmhouse special price"
                                                 id="sale_price"
                                                 name="sale_price"
                                                 value="{{ old('sale_price') }}"
@@ -123,7 +123,7 @@
                                             <input
                                                 class="form-control @error('quantity') is-invalid @enderror"
                                                 type="number"
-                                                placeholder="Enter product quantity"
+                                                placeholder="Enter farmhouse quantity"
                                                 id="quantity"
                                                 name="quantity"
                                                 value="{{ old('quantity') }}"
@@ -139,7 +139,7 @@
                                             <input
                                                 class="form-control @error('weight') is-invalid @enderror"
                                                 type="text"
-                                                placeholder="Enter product weight"
+                                                placeholder="Enter farmhouse weight"
                                                 id="weight"
                                                 name="weight"
                                                 value="{{ old('weight','0') }}"
@@ -199,8 +199,8 @@
                             <div class="tile-footer">
                                 <div class="row d-print-none mt-2">
                                     <div class="col-12 text-right">
-                                        <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Product</button>
-                                        <a class="btn btn-danger" href="{{ route('admin.products.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Go Back</a>
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Farmhouse</button>
+                                        <a class="btn btn-danger" href="{{ route('admin.farmhouses.index') }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Go Back</a>
                                     </div>
                                 </div>
                             </div>
