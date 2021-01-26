@@ -66,17 +66,29 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
         try {
             $collection = collect($params);
 
+            $family_friendly = $collection->has('family_friendly') ? 1 : 0;
             $featured = $collection->has('featured') ? 1 : 0;
             $status = $collection->has('status') ? 1 : 0;
 
-            $merge = $collection->merge(compact('status', 'featured'));
+            $merge = $collection->merge(compact('status', 'featured','family_friendly'));
 
             $farmhouse = new Farmhouse($merge->all());
 
             $farmhouse->save();
 
-            if ($collection->has('categories')) {
-                $farmhouse->categories()->sync($params['categories']);
+            if( $collection->has('featuredImage') && ($params['featuredImage'] instanceof  UploadedFile) ){
+
+                $farmhouse->clearMediaCollection('featuredImage');
+                $farmhouse->addMedia($params['featuredImage'])
+                    ->withResponsiveImages()
+                    ->toMediaCollection('featuredImage');
+            }
+
+            if ( $collection->has('bannerImage') && ($params['bannerImage'] instanceof  UploadedFile) ){
+                $farmhouse->clearMediaCollection('bannerImage');
+                $farmhouse->addMedia($params['bannerImage'])
+                    ->withResponsiveImages()
+                    ->toMediaCollection('bannerImage');
             }
             return $farmhouse;
 
@@ -95,18 +107,55 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
 
         $collection = collect($params)->except('_token');
 
-        $featured = $collection->has('featured') ? 1 : 0;
-        $status = $collection->has('status') ? 1 : 0;
+        $featured        = $collection->has('featured') ? 1 : 0;
+        $family_friendly = $collection->has('family_friendly') ? 1 : 0;
+        $status          = $collection->has('status') ? 1 : 0;
 
-        $merge = $collection->merge(compact('status', 'featured'));
+        $merge = $collection->merge(compact('status', 'featured','family_friendly'));
 
         $farmhouse->update($merge->all());
 
-        if ($collection->has('categories')) {
+        if($collection->has('categories')) {
             $farmhouse->categories()->sync($params['categories']);
         }
 
+        if($collection->has('featuredImage') && ($params['featuredImage'] instanceof  UploadedFile)){
+
+            $farmhouse->clearMediaCollection('featuredImage');
+            $farmhouse->addMedia($params['featuredImage'])
+                ->withResponsiveImages()
+                ->toMediaCollection('featuredImage');
+        }
+
+        if ($collection->has('bannerImage') && ($params['bannerImage'] instanceof  UploadedFile)) {
+
+            $farmhouse->clearMediaCollection('bannerImage');
+            $farmhouse->addMedia($params['bannerImage'])
+                ->withResponsiveImages()
+                ->toMediaCollection('bannerImage');
+        }
+
         return $farmhouse;
+    }
+
+    /**
+     * @param array $params
+     * @return Farmhouse|mixed
+     */
+    public function uploadGalleryImages(array $params)
+    {
+        try {
+            $farmhouse = $this->findFarmhouseById($params['farmhouse_id']);
+            if ( ($params['image'] instanceof  UploadedFile) ){
+                $farmhouse->addMedia($params['image'])
+                    ->withResponsiveImages()
+                    ->toMediaCollection('gallery');
+            }
+            return $farmhouse;
+
+        } catch (QueryException $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
+        }
     }
 
     /**

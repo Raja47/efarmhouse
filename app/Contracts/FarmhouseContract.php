@@ -35,6 +35,11 @@ interface FarmhouseContract
     public function updateFarmhouse(array $params);
 
     /**
+     * @param array $params
+     * @return mixed
+     */
+    public function uploadGalleryImages(array $params);
+    /**
      * @param $id
      * @return bool
      */

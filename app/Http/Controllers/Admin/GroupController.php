@@ -56,9 +56,14 @@ class GroupController extends BaseController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title'      =>  'required|max:191',
-            'image'     =>  'mimes:jpg,jpeg,png|max:10000',
-            'background' => 'mimes:jpg,jpeg,png|max:30000',
+           'title'      =>  'required|max:255',
+            'sku'       =>    'required',
+            //'weight'    =>  'required|regex:/^\d+(\.\d{1,2})?$/',
+            'city_id'  =>   'required|not_in:0',
+            'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
+            'sale_price'=>  'regex:/^\d+(\.\d{1,2})?$/|nullable',
+            'featuredImage' => 'mimes:jpg,jpeg,png|max:10000|nullable',
+            'bannerImage'   => 'mimes:jpg,jpeg,png|max:30000|nullable'
         ]);
 
         $params = $request->except('_token');

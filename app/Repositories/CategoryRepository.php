@@ -69,15 +69,16 @@ class CategoryRepository extends BaseRepository implements CategoryContract
             
 
             $featured = $collection->has('featured') ? 1 : 0;
+            $featured = $collection->has('status') ? 1 : 0;
 
-            $merge = $collection->merge(compact('featured'));
+            $merge = $collection->merge(compact('status','featured'));
 
             $category = new Category($merge->all());
 
             $category->save();
 
 
-            $image = null;
+           $image = null;
            
            if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
                  $category->addMedia($params['background'])
@@ -119,7 +120,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
             
         }
 
-         if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
+        if ($collection->has('background') && ($params['background'] instanceof  UploadedFile)) {
             
             $category->clearMediaCollection('bgImage');
         
@@ -128,6 +129,10 @@ class CategoryRepository extends BaseRepository implements CategoryContract
                 ->toMediaCollection('bgImage');
             
         }
+
+        
+        
+        
 
         $featured = $collection->has('featured') ? 1 : 0;
 
