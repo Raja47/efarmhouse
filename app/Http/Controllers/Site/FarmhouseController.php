@@ -10,6 +10,7 @@ class FarmhouseController extends Controller
 {
 	
 	public function index(){
+		
 		$farmHouses = Farmhouse::all();
         $featuredFarmHouse = Farmhouse::with('facilities')->where('featured',1)->get();
 

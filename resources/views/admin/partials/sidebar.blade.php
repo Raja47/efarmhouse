@@ -28,23 +28,26 @@
           <span>Users</span></a>
       </li>
 
-      <li class="nav-item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}"  >
+      <!-- <li class="nav-item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}"  >
         <a class="nav-link" href="{{ route('admin.orders.index') }}">
           <i class="fas fa-shopping-cart"></i>
           <span>Orders</span></a>
-      </li>
-
-      <li class="nav-item {{ Route::currentRouteName() == 'admin.products.index' ? 'active' : '' }}" >
-        <a class="nav-link" href="{{ route('admin.products.index') }}" >
-          <i class="fas fa-shopping-bag"></i>
-          <span>Products</span></a>
-      </li>
-
+      </li> 
+      
       <li class="nav-item {{ Route::currentRouteName() == 'admin.brands.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.brands.index') }}">
           <i class="fas fa-briefcase"></i>
           <span>Brands</span></a>
       </li>
+    -->
+
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.farmhouses.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.farmhouses.index') }}" >
+          <i class="fas fa-shopping-bag"></i>
+          <span>Farmhouses</span></a>
+      </li>
+
+      
       
       <li class="nav-item {{ Route::currentRouteName() == 'admin.attributes.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.attributes.index') }}">
@@ -52,13 +55,31 @@
           <span>Attributes</span></a>
       </li>
 
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.groups.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.groups.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Groups</span></a>
+      </li>
+
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.cities.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.cities.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Cities</span></a>
+      </li>
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.categories.index') }}">
           <i class="fas fa-tags"></i>
           <span>Categories</span></a>
       </li>
-      
+
+
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.facilities.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.facilities.index') }}">
+          <i class="fas fa-tags"></i>
+          <span>Facilities</span></a>
+      </li>
+      <!--
       <li class="nav-item {{ Route::currentRouteName() == 'admin.banners.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.category.banners.index') }}">
           <i class="fas fa-map"></i>
@@ -85,7 +106,7 @@
           <i class="fas fa-map"></i>
           <span>Videos</span></a>
       </li>
-
+      -->
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.settings' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.settings') }}">

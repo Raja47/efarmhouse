@@ -6,7 +6,7 @@
             <h1><i class="fa fa-shopping-bag"></i> {{ $pageTitle }}</h1>
             <p>{{ $subTitle }}</p>
         </div>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-primary pull-right">Add Product</a>
+        <a href="{{ route('admin.farmhouses.create') }}" class="btn btn-primary pull-right">Add Product</a>
     </div>
     @include('admin.partials.flash')
     <div class="row">
@@ -19,7 +19,7 @@
                             <th> # </th>
                             <th> SKU </th>
                             <th> Name </th>
-                            <th class="text-center"> Brand </th>
+                            <th class="text-center"> City </th>
                             <th class="text-center"> Categories </th>
                             <th class="text-center"> Price </th>
                             <th class="text-center"> Sale Price </th>
@@ -28,23 +28,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $product)
+                            @foreach($farmhouses as $farmhouse)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->sku }}</td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->brand ? $product->brand->name : '--None' }}</td>
+                                    <td>{{ $farmhouse->id }}</td>
+                                    <td>{{ $farmhouse->sku }}</td>
+                                    <td>{{ $farmhouse->title }}</td>
+                                    <td>{{ $farmhouse->city ? $farmhouse->city->title : '--None' }}</td>
                                     <td>
-                                        @if($product->categories)
-                                        @foreach($product->categories as $category)
+                                        @if($farmhouse->categories)
+                                        @foreach($farmhouse->categories as $category)
                                             <span class="badge badge-info">{{ $category->name }}</span>
                                         @endforeach
                                         @endif
                                     </td>
-                                    <td>{{ config('settings.currency_symbol') }}{{ $product->price }}</td>
-                                    <td>{{ $product->sale_price ? config('settings.currency_symbol') .$product->sale_price : '---'  }}</td>
+                                    <td>{{ config('settings.currency_symbol') }}{{ $farmhouse->price }}</td>
+                                    <td>{{ $farmhouse->sale_price ? config('settings.currency_symbol') .$farmhouse->sale_price : '---'  }}</td>
                                     <td class="text-center">
-                                        @if ($product->status == 1)
+                                        @if ($farmhouse->status == 1)
                                             <span class="badge badge-success">Active</span>
                                         @else
                                             <span class="badge badge-danger">Not Active</span>
@@ -52,8 +52,8 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.products.delete', $product->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('admin.farmhouses.edit', $farmhouse->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.farmhouses.delete', $farmhouse->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
