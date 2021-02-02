@@ -46,14 +46,14 @@ class FarmhouseController extends BaseController
     public function store(Request $request)
     {   
         $this->validate($request, [
-            'title'      =>  'required|max:191',
-            'sku'       =>    'required',
-            // 'weight'    =>  'required|regex:/^\d+(\.\d{1,2})?$/',
-            'city_id'  =>   'required|not_in:0',
-            'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
-            'sale_price'=>  'regex:/^\d+(\.\d{1,2})?$/|nullable',
-            'featuredImage' => 'mimes:jpg,jpeg,png|max:10000|nullable',
-            'bannerImage'   => 'mimes:jpg,jpeg,png|max:30000|nullable'
+            'title'         =>  'required|max:191',
+            'sku'           =>  'required',
+            'categories'    =>  'required',
+            'city_id'       =>  'required|not_in:0',
+            'price'         =>  'required|regex:/^\d+(\.\d{1,2})?$/',
+            'sale_price'    =>  'regex:/^\d+(\.\d{1,2})?$/|nullable',
+            'featuredImage' =>  'mimes:jpg,jpeg,png|max:10000|nullable',
+            'bannerImage'   =>  'mimes:jpg,jpeg,png|max:30000|nullable'
         ]);
 
         $params = $request->except('_token');
@@ -80,12 +80,12 @@ class FarmhouseController extends BaseController
     {
         $params = $request->except('_token');
          $this->validate($request, [
-           'title'      =>  'required|max:255',
-            'sku'       =>    'required',
-            'weight'    =>  'required|regex:/^\d+(\.\d{1,2})?$/',
-            'city_id'   =>   'required|not_in:0',
-            'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
-            'sale_price'=>  'regex:/^\d+(\.\d{1,2})?$/|nullable',
+            'title'         => 'required|max:255',
+            'sku'           => 'required',
+            'categories'    => 'required',
+            'city_id'       => 'required|not_in:0',
+            'price'         => 'required|regex:/^\d+(\.\d{1,2})?$/',
+            'sale_price'    => 'regex:/^\d+(\.\d{1,2})?$/|nullable',
             'featuredImage' => 'mimes:jpg,jpeg,png|max:10000|nullable',
             'bannerImage'   => 'mimes:jpg,jpeg,png|max:30000|nullable'
         ]);
@@ -109,11 +109,24 @@ class FarmhouseController extends BaseController
 
     public function uploadGalleryImages(Request $request){
         
-        
-        $uploaded = $this->farmhouseRepository->updateFarmhouse($params);
+        $params = $request->except('_token');
+        $uploaded = $this->farmhouseRepository->uploadGalleryImages($params);
         
         if (!$uploaded) {
             return $this->responseRedirectBack('Error occurred while updating farmhouse.', 'error', true, true);
+        }
+
+        return $this->responseRedirect( 'admin.farmhouses.index' , 'Farmhouse updated successfully' ,'success',false, false);
+    }
+
+    public function deleteGalleryImage($farmhouseId ,$mediaId ){
+
+        $farmhouse  = $this->farmhouseRepository->findFarmhouseById($farmhouseId);
+        $medias = $farmhouse->getMedia('gallery');
+        $deleted = $medias[$mediaId]->delete();        
+    
+        if (!$deleted) {
+            return $this->responseRedirectBack('Error occurred while Deleting Image', 'error', true, true);
         }
 
         return $this->responseRedirect( 'admin.farmhouses.index' , 'Farmhouse updated successfully' ,'success',false, false);

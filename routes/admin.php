@@ -127,7 +127,7 @@ Route::group(['prefix'  =>  'admin'], function (){
            Route::post('/update', 'Admin\FarmhouseController@update')->name('admin.farmhouses.update');
 
            Route::post('images/upload', 'Admin\FarmhouseController@uploadGalleryImages')->name('admin.farmhouses.images.upload');
-           Route::get('images/{id}/delete', 'Admin\FarmhouseController@deleteGalleryImage')->name('admin.farmhouses.images.delete');
+           Route::get('{farmhouseId}/images/{mediaId}/delete', 'Admin\FarmhouseController@deleteGalleryImage')->name('admin.farmhouses.images.delete');
            //Route::get('images/show', 'Admin\FarmhouseController@show')->name('admin.farmhouses.images.show');
 
            // Route::get('attributes/load', 'Admin\ProductAttributeController@loadAttributes');

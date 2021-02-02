@@ -79,6 +79,9 @@
                                             <label class="control-label" for="categories">Categories</label>
                                             <select name="categories[]" id="categories" class="form-control" multiple>
                                                 @foreach($categories as $category)
+                                                    @php 
+                                                        $check = is_array(old('categories')) && in_array( $category->id , old('categories') ) ? 'selected' : '' @endphp
+
                                                     <option value="{{ $category->id }}" >{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
@@ -172,6 +175,11 @@
                                         <div class="form-group">
                                             <label class="control-label" for="keywords">Keywords</label>
                                             <select type="hidden" name="keywords[]" id="keywords" class="form-control" multiple>
+                                                @if( is_array(old('keywords')) ) 
+                                                  @foreach( old('keywords') as $keyword)
+                                                        <option value="{{ $keyword }}" selected >{{ $keyword}} </option>
+                                                  @endforeach
+                                                @endif    
                                             </select>
                                         </div>
                                     </div>
@@ -479,6 +487,58 @@
                                 </div>
 
 
+                                <hr>
+                                 <fieldset>
+                                    <legend>Farmhouse Seo:</legend>    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="seo_title">Seo Meta Title</label>
+                                                <input
+                                                    class="form-control @error('seo_title') is-invalid @enderror"
+                                                    type="text"
+                                                    placeholder="Enter Seo Meta Title"
+                                                    id="seo_title"
+                                                    name="seo_title"
+                                                    value="{{ old('seo_title') }}"
+                                                />
+                                               
+                                                <div class="invalid-feedback active">
+                                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('seo_title') <span>{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                             <label class="control-label" for="seo_description">Seo Meta Description</label>
+                                            <textarea name="seo_description" id="seo_description" rows="2" class="form-control">{{ old('seo_description') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="seo_keywords">Seo Keywords</label>
+                                            <select type="hidden" name="seo_keywords[]" id="seo_keywords" class="form-control" multiple>
+                                                @if( is_array(old('seo_keywords')) ) 
+                                                  @foreach( old('seo_keywords') as $keyword)
+                                                        <option value="{{ $keyword }}" selected >{{ $keyword}} </option>
+                                                  @endforeach
+                                                @endif    
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                </fieldset>
+
+                                <hr/>
+
 
 
 
@@ -489,7 +549,7 @@
                                                    type="checkbox"
                                                    id="status"
                                                    name="status"
-                                                  
+                                                  {{ old( "status") ? 'checked' : '' }}
                                                 />Status
                                         </label>
                                     </div>
@@ -502,7 +562,7 @@
                                                    type="checkbox"
                                                    id="featured"
                                                    name="featured"
-                                                  
+                                                   {{ old( "featured") ? 'checked' : '' }}
                                                 />Featured
                                         </label>
                                     </div>
@@ -515,7 +575,7 @@
                                                    type="checkbox"
                                                    id="family_friendly"
                                                    name="family_friendly"
-                                                  
+                                                  {{ old( "family_friendly") ? 'checked' : '' }}
                                                 />Family Friendly
                                         </label>
                                     </div>
@@ -538,16 +598,27 @@
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/select2.min.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.14.1/adapters/jquery.min.js"></script>
     <script>
         $( document ).ready(function() {
             $('#categories').select2();
         
             $("#keywords").select2({
                 tags: true,
-                tokenSeparators: [',', ' ']
+                tokenSeparators: [',']
             });
+
+             $('#seo_keywords').select2({
+                tags: true,
+                tokenSeparators: [',']
+             });
             
         });
         
+    </script>
+     <script type="text/javascript">
+            $('#description').ckeditor();
+            $('#short_description').ckeditor();
     </script>
 @endpush

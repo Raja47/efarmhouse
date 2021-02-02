@@ -76,6 +76,8 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
 
             $farmhouse->save();
 
+            $farmhouse->categories()->sync($collection->categories);
+
             if( $collection->has('featuredImage') && ($params['featuredImage'] instanceof  UploadedFile) ){
 
                 $farmhouse->clearMediaCollection('featuredImage');
@@ -115,10 +117,9 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
 
         $farmhouse->update($merge->all());
 
-        if($collection->has('categories')) {
-            $farmhouse->categories()->sync($params['categories']);
-        }
-
+      
+        $farmhouse->categories()->sync($params['categories']);
+       
         if($collection->has('featuredImage') && ($params['featuredImage'] instanceof  UploadedFile)){
 
             $farmhouse->clearMediaCollection('featuredImage');
@@ -158,6 +159,7 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
         }
     }
 
+
     /**
      * @param $id
      * @return bool|mixed
@@ -181,4 +183,6 @@ class FarmhouseRepository extends BaseRepository implements FarmhouseContract
 
         return $farmhouse;
     }
+
+
 }

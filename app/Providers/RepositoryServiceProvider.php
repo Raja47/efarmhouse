@@ -14,6 +14,8 @@ use App\Contracts\FacilityContract;
 use App\Repositories\FacilityRepository;
 use App\Contracts\FarmhouseContract;
 use App\Repositories\FarmhouseRepository;
+use App\Contracts\UserContract;
+use App\Repositories\UserRepository;
 
 //use App\Contracts\AttributeContract;
 // use App\Repositories\AttributeRepository;
@@ -25,8 +27,7 @@ use App\Repositories\FarmhouseRepository;
 // use App\Repositories\BannerRepository;
 // use App\Contracts\CategoryBannerContract;
 // use App\Repositories\CategoryBannerRepository;
-// use App\Contracts\UserContract;
-// use App\Repositories\UserRepository;
+
 // use App\Contracts\CouponAndDealContract;
 // use App\Repositories\CouponAndDealRepository;
 
@@ -38,6 +39,7 @@ class RepositoryServiceProvider extends ServiceProvider
         GroupContract::class            =>          GroupRepository::class,
         FacilityContract::class         =>          FacilityRepository::class,
         FarmhouseContract::class        =>          FarmhouseRepository::class,
+        UserContract::class             =>          UserRepository::class
        
         //CategoryBannerContract::class   =>          CategoryBannerRepository::class,
         //UserContract::class             =>          UserRepository::class,

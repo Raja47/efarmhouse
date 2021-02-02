@@ -28,11 +28,18 @@
           <span>Users</span></a>
       </li>
 
-      <li class="nav-item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}"  >
+      <!-- <li class="nav-item {{ Route::currentRouteName() == 'admin.orders.index' ? 'active' : '' }}"  >
         <a class="nav-link" href="{{ route('admin.orders.index') }}">
           <i class="fas fa-shopping-cart"></i>
           <span>Orders</span></a>
+      </li> 
+      
+      <li class="nav-item {{ Route::currentRouteName() == 'admin.brands.index' ? 'active' : '' }}" >
+        <a class="nav-link" href="{{ route('admin.brands.index') }}">
+          <i class="fas fa-briefcase"></i>
+          <span>Brands</span></a>
       </li>
+    -->
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.farmhouses.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.farmhouses.index') }}" >
@@ -40,11 +47,7 @@
           <span>Farmhouses</span></a>
       </li>
 
-      <li class="nav-item {{ Route::currentRouteName() == 'admin.brands.index' ? 'active' : '' }}" >
-        <a class="nav-link" href="{{ route('admin.brands.index') }}">
-          <i class="fas fa-briefcase"></i>
-          <span>Brands</span></a>
-      </li>
+      
       
       <li class="nav-item {{ Route::currentRouteName() == 'admin.attributes.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.attributes.index') }}">
@@ -76,7 +79,7 @@
           <i class="fas fa-tags"></i>
           <span>Facilities</span></a>
       </li>
-      
+      <!--
       <li class="nav-item {{ Route::currentRouteName() == 'admin.banners.index' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.category.banners.index') }}">
           <i class="fas fa-map"></i>
@@ -103,7 +106,7 @@
           <i class="fas fa-map"></i>
           <span>Videos</span></a>
       </li>
-
+      -->
 
       <li class="nav-item {{ Route::currentRouteName() == 'admin.settings' ? 'active' : '' }}" >
         <a class="nav-link" href="{{ route('admin.settings') }}">

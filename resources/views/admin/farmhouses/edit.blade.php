@@ -23,7 +23,7 @@
                 <ul class="nav flex-column nav-tabs user-tabs">
                     <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
                     <li class="nav-item"><a class="nav-link" href="#images" data-toggle="tab">Images</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#attributes" data-toggle="tab">Attributes</a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -93,7 +93,7 @@
                                             <label class="control-label" for="categories">Categories</label>
                                             <select name="categories[]" id="categories" class="form-control" multiple>
                                                 @foreach($categories as $category)
-                                                    @php $check = in_array($category->id, $farmhouse->categories->pluck('id')->toArray()) ? 'selected' : ''@endphp
+                                                    @php $check = in_array( $category->id , old('categories', $farmhouse->categories->pluck('id')->toArray()) ) ? 'selected' : ''@endphp
                                                     <option value="{{ $category->id }}" {{ $check }}>{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
@@ -133,6 +133,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="control-label" for="weekdays_difference" title="Differnce if there for except saturdays and sundays">Week days Difference (If any)</label>
@@ -149,6 +150,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -189,7 +191,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="keywords">Keywords/keywords</label>
+                                            <label class="control-label" for="keywords">Keywords</label>
                                             <select type="hidden" name="keywords[]" id="keywords" class="form-control" multiple>
                                                 @if($farmhouse->keywords)
                                                     @foreach($farmhouse->keywords as $keyword)
@@ -487,7 +489,7 @@
                                                 <figure class="mt-2" style="width: 80px; height: auto;">
                                                     <img src="{{ $farmhouse->getFirstMediaUrl('bannerImage') }}" id="bannerImage" class="img-fluid" alt="img">
                                                 </figure>
-                                           @endif
+                                            @endif
                                         </div>
                                         <div class="col-md-10">
                                             <label class="control-label">Banner Image</label>
@@ -512,15 +514,78 @@
                                                 name="youtube_video_link"
                                                 value="{{ old('youtube_video_link', $farmhouse->youtube_video_link) }}"
                                             />
-                                           
+
                                             <div class="invalid-feedback active">
                                                 <i class="fa fa-exclamation-circle fa-fw"></i> @error('youtube_video_link') <span>{{ $message }}</span> @enderror
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
 
 
+
+
+                                <hr>
+                                 <fieldset>
+                                    <legend>Farmhouse Seo:</legend>    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="seo_title">Seo Meta Title</label>
+                                                <input
+                                                    class="form-control @error('seo_title') is-invalid @enderror"
+                                                    type="text"
+                                                    placeholder="Enter Seo Meta Title"
+                                                    id="seo_title"
+                                                    name="seo_title"
+                                                    value="{{ old('seo_title',$farmhouse->seo_title) }}"
+                                                />
+                                               
+                                                <div class="invalid-feedback active">
+                                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('seo_title') <span>{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                             <label class="control-label" for="seo_description">Seo Meta Description</label>
+                                            <textarea name="seo_description" id="seo_description" rows="2" class="form-control">{{ old('seo_description',$farmhouse->seo_description) }}</textarea>
+                                            
+                                            <div class="invalid-feedback active">
+                                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('seo_description') <span>{{ $message }}</span> @enderror
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                               <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="seo_keywords">Seo Keywords</label>
+                                            <select type="hidden" name="seo_keywords[]" id="seo_keywords" class="form-control" multiple>
+                                                
+                                                  @foreach( old('seo_keywords',$farmhouse->seo_keywords) as $keyword)
+                                                        <option value="{{ $keyword }}" selected >{{ $keyword}} </option>
+                                                  @endforeach
+                                                    
+                                            </select>
+
+                                            <div class="invalid-feedback active">
+                                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('seo_keywords') <span>{{ $message }}</span> @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </fieldset>
+
+                                <hr/>
 
 
 
@@ -531,7 +596,7 @@
                                                    type="checkbox"
                                                    id="status"
                                                    name="status"
-                                                   {{ $farmhouse->status == 1 ? 'checked' : '' }}
+                                                   {{ old( "status" , $farmhouse->status == 1 ) ? 'checked' : '' }}
                                                 />Status
                                         </label>
                                     </div>
@@ -544,7 +609,7 @@
                                                    type="checkbox"
                                                    id="featured"
                                                    name="featured"
-                                                   {{ $farmhouse->featured == 1 ? 'checked' : '' }}
+                                                   {{ old( "featured" , $farmhouse->featured == 1) ? 'checked' : '' }}
                                                 />Featured
                                         </label>
                                     </div>
@@ -557,7 +622,7 @@
                                                    type="checkbox"
                                                    id="family_friendly"
                                                    name="family_friendly"
-                                                   {{ $farmhouse->family_friendly == 1 ? 'checked' : '' }}
+                                                   {{ old( "family_friendly" , $farmhouse->family_friendly == 1) ? 'checked' : '' }}
                                                 />Family Friendly
                                         </label>
                                     </div>
@@ -594,15 +659,16 @@
                                     </button>
                                 </div>
                             </div>
-                            @if ($farmhouse->images)
+                            @if ( ($medias = $farmhouse->getMedia('gallery')) != null)
+                            
                                 <hr>
                                 <div class="row">
-                                    @foreach($farmhouse->images as $image)
+                                    @foreach($medias as $key => $media)
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img src="{{ asset('storage/farmhouses/original/'.$image->full) }}" id="cityLogo" class="img-fluid" alt="img">
-                                                    <a class="card-link float-right text-danger" href="{{ route('admin.farmhouses.images.delete', $image->id) }}">
+                                                    <img src="{{ $media->getFullUrl() }}" id="cityLogo" class="img-fluid" alt="img">
+                                                    <a class="card-link float-right text-danger" href="{{ route('admin.farmhouses.images.delete', [ $farmhouse->id , $key ]) }}">
                                                         <i class="fa fa-fw fa-lg fa-trash"></i>
                                                     </a>
                                                 </div>
@@ -614,9 +680,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="attributes">
-                    <farmhouse-attributes :farmhouseid="{{ $farmhouse->id }}"></farmhouse-attributes>
-                </div>
+            
             </div>
         </div>
     </div>
@@ -626,6 +690,8 @@
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/plugins/bootstrap-notify.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/app.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.14.1/adapters/jquery.min.js"></script>
     <script>
         Dropzone.autoDiscover = false;
 
@@ -633,7 +699,15 @@
             
             $('#categories').select2();
         
-            $("#keywords").select2({    keywords: true, });
+            $("#keywords").select2({
+                tags: true,
+                tokenSeparators: [',']
+            });
+
+            $("#seo_keywords").select2({
+                tags: true,
+                tokenSeparators: [',']
+            });
 
             let myDropzone = new Dropzone("#dropzone", {
                 paramName: "image",
@@ -681,5 +755,9 @@
                 });
             }
         });
+    </script>
+    <script type="text/javascript">
+            $('#description').ckeditor();
+            $('#short_description').ckeditor();
     </script>
 @endpush

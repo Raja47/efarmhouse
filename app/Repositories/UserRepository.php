@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 //use Cart;
-use App\Models\User;
+use App\User;
 //use App\Models\Product;
 //use App\Models\OrderItem;
 use App\Contracts\UserContract;
