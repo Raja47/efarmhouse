@@ -13,8 +13,9 @@ class FarmhouseController extends Controller
 		
 		$farmHouses = Farmhouse::all();
         $featuredFarmHouse = Farmhouse::with('facilities')->where('featured',1)->get();
+        $featuredCities =  City::where('featured',1)->get();
 
-        return view('home',['farmHouses' => $farmHouses , 'featuredFarmHouse'=> $featuredFarmHouse]);
+        return view('home',['farmHouses' => $farmHouses , 'featuredFarmHouse'=> $featuredFarmHouse , 'featuredCities' =>$featuredCities ]);
 	}
 
 }

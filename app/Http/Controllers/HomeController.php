@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Farmhouse;
-
+use App\City;
 class HomeController extends Controller
 {
     /**
@@ -16,8 +16,9 @@ class HomeController extends Controller
     {
         $farmHouses = Farmhouse::all();
         $featuredFarmHouse = Farmhouse::with('facilities')->where('featured',1)->get();
+        $featuredCities =  City::where('featured',1)->get();
 
-        return view('home',['farmHouses' => $farmHouses , 'featuredFarmHouse'=> $featuredFarmHouse]);
+        return view('site.home',['farmHouses' => $farmHouses , 'featuredFarmHouse'=> $featuredFarmHouse ,'featuredCities'=>$featuredCities]);
     }
 
     /**
@@ -52,7 +53,7 @@ class HomeController extends Controller
 
         $farmHouse = Farmhouse::where('slug',$slug)->get();
 
-        return view('farm_detail',['farmHouse'=>$farmHouse]);
+        return view('site.farm_detail',['farmHouse'=>$farmHouse]);
 
         return $farmHouse;
     }

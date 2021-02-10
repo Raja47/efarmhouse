@@ -204,73 +204,21 @@
             </div>
                 <div class="list-item">
             <div class="row">
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=14">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/super-highway.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Super Highway / Toll Plaza</h4>
+                @foreach($featuredCities as $city)
+                <div class="col-lg-4">
+                    <div class="destination-item ">
+                    <a href="http://efarmhouses.pk/en/farmhouse?location_id=14">
+                        <div class="image" style="background: url({{ $city->getFirstMediaUrl('bgImage') }})">
+                        <div class="effect"></div>
+                            <div class="content">
+                                <h4 class="title">{{$city->title}}</h4>
                             </div>
-        </div>
-    </a>
-</div>                    </div>
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=13">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/hawks.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Hawke's Bay</h4>
-                            </div>
-        </div>
-    </a>
-</div>                    </div>
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=12">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/gadap.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Gadap</h4>
-                            </div>
-        </div>
-    </a>
-</div>                    </div>
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=11">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/malir.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Malir Cant</h4>
-                            </div>
-        </div>
-    </a>
-</div>                    </div>
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=10">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/dhabeji.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Dhabeji</h4>
-                            </div>
-        </div>
-    </a>
-</div>                    </div>
-                                                        <div class="col-lg-4">
-                        <div class="destination-item ">
-    <a href="http://efarmhouses.pk/en/farmhouse?location_id=9">
-        <div class="image" style="background: url(http://efarmhouses.pk/uploads/0000/1/2020/09/29/karachi.png)">
-            <div class="effect"></div>
-            <div class="content">
-                <h4 class="title">Karachi</h4>
-                            </div>
-        </div>
-    </a>
-</div>                    </div>
-                            </div>
+                        </div>
+                    </a>
+                    </div>                    
+                </div>
+                @endforeach                              
+            </div>
         </div>
     </div>
 </div><div class="container">

@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="featured" name="featured"/>Featured Category
+                                    <input class="form-check-input" type="checkbox" id="featured" name="featured"/>Featured City
                                 </label>
                             </div>
                         </div>
@@ -47,12 +47,12 @@
                         
                         
                         <div class="form-group">
-                            <label class="control-label">Category Image</label>
+                            <label class="control-label">City Image</label>
                             <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                             @error('image') {{ $message }} @enderror
                         </div>
                          <div class="form-group">
-                            <label class="control-label">Category background</label>
+                            <label class="control-label">Category Background</label>
                             <input class="form-control @error('background') is-invalid @enderror" type="file" id="background" name="background"/>
                             @error('image') {{ $message }} @enderror
                         </div>
